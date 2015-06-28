@@ -7,8 +7,7 @@ class Boss(nrOfWorkers: Int, nrOfMessages: Int, nrOfElements: Int, listener: Act
   var nrOfResults: Int = _
   val start: Long = System.currentTimeMillis
 
-  val workerRouter = context.actorOf(
-    Props[Worker].withRouter(RoundRobinRouter(nrOfWorkers)), name = "workerRouter")
+  val workerRouter = context.actorOf(Props[Worker].withRouter(RoundRobinRouter(nrOfWorkers)), name = "workerRouter")
 
   override def receive = {
     case Calculate => {
@@ -32,11 +31,11 @@ class Worker extends Actor {
   }
 
   def calculatePiFor(start: Int, nrOfElements: Int): BigDecimal = {
-    var acc = BigDecimal(0.0)
+    var result = BigDecimal(0.0)
     for (i <- start until (start + nrOfElements)) {
-      acc += BigDecimal(4.0) * (1 - (i % 2) * 2) / (2 * i + 1)
+      result += BigDecimal(4.0) * (1 - (i % 2) * 2) / (2 * i + 1)
     }
-    acc
+    result
   }
 }
 

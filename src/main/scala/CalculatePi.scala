@@ -2,7 +2,7 @@ import akka.actor.{ActorSystem, Props}
 
 object CalculatePi extends App {
 
-  val system = ActorSystem("pi")
+  val system = ActorSystem("calculate-pi")
 
   val piListener = system.actorOf(Props[Listener])
 
